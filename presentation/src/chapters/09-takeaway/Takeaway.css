@@ -1,0 +1,438 @@
+/* Chapter 9 · takeaway — three take-home cards + quiet thank-you
+   (monochrome-print theme). Persistent card stack across steps 1–4,
+   final step fades to a single italic-serif "Thank you." */
+
+.tk-scene {
+  position: absolute;
+  inset: 0;
+  padding: 80px 130px 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.tk-mono   { font-family: var(--font-mono); letter-spacing: 0.06em; }
+.tk-accent { color: var(--accent); }
+
+/* ── masthead + folio (shared chrome, steps 1–4 only) ── */
+
+.tk-masthead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.18em;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.tk-masthead__issue { color: var(--accent); }
+.tk-masthead__sep   { color: var(--text-faint); }
+.tk-masthead__topic { color: var(--text-2); }
+
+.tk-folio {
+  position: absolute;
+  top: 80px;
+  right: 130px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+
+/* ── section header ── */
+
+.tk-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 1300px;
+}
+.tk-section--compact { gap: 4px; }
+.tk-section__eyebrow {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.tk-section__title {
+  font-family: var(--font-display-en);
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+
+/* ── citation badge ── */
+.tk-cite {
+  position: absolute;
+  bottom: 60px;
+  right: 130px;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border-top: 1px solid var(--rule);
+  font-feature-settings: "tnum", "lnum";
+}
+
+/* ── animations ── */
+
+@keyframes tkFadeIn {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: none;              opacity: 1; }
+}
+@keyframes tkRuleDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes tkCardLight {
+  from { transform: translateY(8px); opacity: 0.35; }
+  to   { transform: none;            opacity: 1; }
+}
+@keyframes tkDimIn {
+  from { opacity: 0; }
+  to   { opacity: 0.45; }
+}
+@keyframes tkRowIn {
+  from { transform: translateX(-12px); opacity: 0; }
+  to   { transform: none;              opacity: 1; }
+}
+
+/* ── card stack (persistent across steps 1–4) ── */
+
+.tk-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  margin-top: 24px;
+  flex: 1;
+  align-items: stretch;
+}
+
+.tk-card {
+  background: var(--surface-2);
+  padding: 36px 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 540px;
+  transition: opacity 600ms ease, filter 600ms ease;
+}
+
+.tk-card--placeholder {
+  animation: tkFadeIn 800ms ease-out both;
+  opacity: 0.55;
+}
+.tk-card--placeholder .tk-card__num,
+.tk-card--placeholder .tk-card__mono {
+  color: var(--text-mute);
+}
+
+.tk-card--dim {
+  opacity: 0.32;
+  filter: grayscale(0.4);
+}
+.tk-card--dim .tk-card__num,
+.tk-card--dim .tk-card__mono {
+  color: var(--text-faint);
+}
+
+.tk-card--done {
+  opacity: 0.45;
+}
+.tk-card--done .tk-card__num,
+.tk-card--done .tk-card__mono {
+  color: var(--text-mute);
+}
+
+.tk-card--active {
+  background: var(--surface-2);
+  outline: 1px solid var(--accent);
+  outline-offset: 0;
+  animation: tkCardLight 700ms ease-out both;
+  position: relative;
+}
+.tk-card--active::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px -1px -1px;
+  border-left: 3px solid var(--accent);
+  pointer-events: none;
+}
+
+.tk-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+}
+.tk-card__num {
+  font-size: 80px;
+  line-height: 0.9;
+  color: var(--text);
+}
+.tk-card--active .tk-card__num { color: var(--accent); }
+.tk-card__mono {
+  font-size: 14px;
+  color: var(--text-2);
+  letter-spacing: 0.2em;
+  line-height: 1.4;
+  flex: 1;
+}
+.tk-card--active .tk-card__mono { color: var(--accent); }
+.tk-card__check {
+  font-size: 18px;
+  color: var(--text-mute);
+}
+.tk-card__rule {
+  margin: 4px 0 8px;
+  animation: tkRuleDraw 700ms 300ms ease-out both;
+  transform-origin: left center;
+}
+.tk-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tk-card__body--empty {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.tk-card__pending,
+.tk-card__done-text {
+  font-size: 14px;
+  color: var(--text-faint);
+  letter-spacing: 0.24em;
+  margin-top: 12px;
+}
+.tk-card__concl {
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+.tk-card__concl em { font-style: italic; }
+.tk-card__concl--big {
+  font-size: 26px;
+  color: var(--text);
+}
+
+/* ── Card 01 — alignment / divergence visual ── */
+
+.tk-c1 {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: tkFadeIn 800ms 400ms ease-out both;
+}
+.tk-c1__row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tk-c1__label {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+.tk-c1__rule {
+  margin: 6px 0;
+}
+.tk-c1__row--div .tk-c1__label { color: var(--accent); }
+.tk-c1__note {
+  font-family: var(--font-display-en);
+  font-size: 17px;
+  color: var(--text-2);
+  font-style: italic;
+  line-height: 1.4;
+}
+.tk-c1__divs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.tk-dot { display: block; margin: 6px 0; }
+
+.tk-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  width: fit-content;
+}
+.tk-pill__arrow { display: block; }
+.tk-pill__label {
+  font-size: 13px;
+  color: var(--text);
+  letter-spacing: 0.18em;
+}
+
+/* ── Card 02 — +30% hero ── */
+
+.tk-c2 {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: tkFadeIn 800ms 400ms ease-out both;
+}
+.tk-c2__hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.tk-c2__num {
+  font-size: 160px;
+  line-height: 0.9;
+  color: var(--text);
+}
+.tk-c2__arrow { flex-shrink: 0; }
+.tk-c2__range {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.tk-c2__y {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 36px;
+  color: var(--text);
+  font-feature-settings: "tnum";
+}
+.tk-c2__sep {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--text-mute);
+}
+.tk-c2__yr {
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.18em;
+  margin-left: 8px;
+}
+
+/* ── Card 03 — next-step rows ── */
+
+.tk-c3 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 6px;
+}
+.tk-nx {
+  display: grid;
+  grid-template-columns: 140px auto 1fr;
+  align-items: baseline;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--rule);
+  opacity: 0;
+  animation: tkRowIn 600ms ease-out forwards;
+}
+.tk-nx__mono {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+}
+.tk-nx__sep {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  color: var(--text-faint);
+}
+.tk-nx__en {
+  font-family: var(--font-display-en);
+  font-size: 20px;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ── Step 5 — quiet thank-you ── */
+
+.tk-scene--thanks {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.tk-thanks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  animation: tkFadeIn 1400ms ease-out both;
+}
+.tk-thanks__hero {
+  font-family: var(--font-display-en);
+  font-size: 220px;
+  line-height: 1;
+  color: var(--text);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.tk-thanks__hero em { font-style: italic; }
+.tk-thanks__rule {
+  width: 360px;
+  margin: 36px 0 28px;
+  animation: tkRuleDraw 1100ms 700ms ease-out both;
+  transform-origin: center;
+}
+.tk-thanks__sub {
+  font-family: var(--font-display-en);
+  font-size: 32px;
+  color: var(--text-2);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.tk-thanks__foot {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: tkFadeIn 1200ms 900ms ease-out both;
+}
+.tk-thanks__author {
+  font-family: var(--font-display-en);
+  font-size: 18px;
+  color: var(--text-2);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+.tk-thanks__aff {
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.16em;
+}
+.tk-thanks__attr {
+  font-size: 11px;
+  color: var(--text-faint);
+  letter-spacing: 0.28em;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  width: 240px;
+  text-align: center;
+}

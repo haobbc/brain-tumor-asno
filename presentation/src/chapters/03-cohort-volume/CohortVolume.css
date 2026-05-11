@@ -1,0 +1,594 @@
+/* Chapter 3 · cohort-volume — refined print journal aesthetic
+   (monochrome-print theme). 1px hairlines, ink-blue accent, generous
+   serif headings. Class prefix .cv- */
+
+.cv-scene {
+  position: absolute;
+  inset: 0;
+  padding: 80px 130px 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.cv-mono   { font-family: var(--font-mono); letter-spacing: 0.06em; }
+.cv-accent { color: var(--accent); }
+
+/* masthead (top) */
+.cv-masthead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.18em;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.cv-masthead__issue { color: var(--accent); }
+.cv-masthead__sep   { color: var(--text-faint); }
+.cv-masthead__topic { color: var(--text-2); }
+
+/* folio (chapter number) */
+.cv-folio {
+  position: absolute;
+  top: 80px;
+  right: 130px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+
+/* citation badge bottom-right */
+.cv-cite {
+  position: absolute;
+  bottom: 60px;
+  right: 130px;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border-top: 1px solid var(--rule);
+  font-feature-settings: "tnum", "lnum";
+}
+
+/* shared section header */
+.cv-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 1500px;
+}
+.cv-section--compact { gap: 8px; }
+.cv-section__eyebrow {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.cv-section__title {
+  font-family: var(--font-display-en);
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+.cv-section__title--compact { font-size: 38px; }
+
+/* shared animation primitives */
+@keyframes cvFadeUp {
+  from { transform: translateY(14px); opacity: 0; }
+  to   { transform: none;              opacity: 1; }
+}
+@keyframes cvFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes cvRuleDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes cvHeroIn {
+  from { transform: scale(0.92); opacity: 0; letter-spacing: 0.04em; }
+  to   { transform: none;        opacity: 1; letter-spacing: -0.03em; }
+}
+@keyframes cvBarGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes cvSweep {
+  from { stroke-dashoffset: 600; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes cvDrawPath {
+  from { stroke-dasharray: 1200; stroke-dashoffset: 1200; fill-opacity: 0; }
+  to   { stroke-dasharray: 1200; stroke-dashoffset: 0;    fill-opacity: 1; }
+}
+@keyframes cvDotPop {
+  from { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  60%  { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  to   { transform: translate(-50%, -50%) scale(1);   opacity: 1; }
+}
+@keyframes cvArrowDraw {
+  from { stroke-dasharray: 280; stroke-dashoffset: 280; }
+  to   { stroke-dasharray: 280; stroke-dashoffset: 0; }
+}
+@keyframes cvAnnotDraw {
+  from { stroke-dasharray: 900; stroke-dashoffset: 900; opacity: 0; }
+  to   { stroke-dasharray: 900; stroke-dashoffset: 0;   opacity: 1; }
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 1 — section opener
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-scene--opener { justify-content: center; }
+.cv-opener {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1500px;
+  animation: cvFadeUp 1000ms ease-out both;
+}
+.cv-opener__eyebrow {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.28em;
+}
+.cv-opener__title {
+  font-family: var(--font-display-en);
+  font-size: 120px;
+  line-height: 1.05;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.cv-opener__rule {
+  width: 420px;
+  margin: 18px 0 6px;
+  animation: cvRuleDraw 900ms 500ms ease-out both;
+  transform-origin: left center;
+}
+.cv-opener__sub {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  color: var(--text-2);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 2 — mean age hero + bell curve
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-scene--mean { justify-content: flex-start; }
+.cv-mean {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.cv-mean__hero {
+  display: flex;
+  align-items: baseline;
+  gap: 36px;
+  animation: cvHeroIn 1000ms cubic-bezier(.22,.61,.36,1) both;
+}
+.cv-mean__value {
+  font-size: 280px;
+  line-height: 0.85;
+  color: var(--text);
+}
+.cv-mean__pm {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 110px;
+  color: var(--text-mute);
+  line-height: 0.9;
+}
+.cv-mean__sd {
+  font-size: 180px;
+  line-height: 0.85;
+  color: var(--text-2);
+}
+.cv-mean__legend {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  animation: cvFadeIn 700ms 700ms ease-out both;
+}
+.cv-mean__legend-key {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.26em;
+}
+.cv-mean__legend-sep { color: var(--text-faint); }
+.cv-mean__legend-units {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--text-mute);
+  margin-left: 6px;
+}
+.cv-mean__curve {
+  width: 720px;
+  height: 130px;
+  margin-top: 10px;
+}
+.cv-mean__bell {
+  animation: cvDrawPath 1300ms 400ms ease-out both;
+  transform-origin: center;
+}
+.cv-mean__caption {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.16em;
+  margin-top: 6px;
+  animation: cvFadeIn 700ms 1100ms ease-out both;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 3 — age ≥ 40 bar + female 53.9% sector
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-split {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 60px;
+  margin-top: 30px;
+  flex: 1;
+  align-items: center;
+}
+.cv-split__div {
+  width: 1px;
+  background: var(--rule);
+  height: 70%;
+  justify-self: center;
+}
+.cv-split__panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: stretch;
+  animation: cvFadeUp 800ms ease-out both;
+}
+.cv-split__panel-mono {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.26em;
+}
+.cv-split__panel-foot {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+}
+
+/* horizontal bar */
+.cv-bar {
+  position: relative;
+  height: 100px;
+  border: 1px solid var(--rule);
+  display: flex;
+  background: var(--surface-2);
+}
+.cv-bar__fill {
+  background: var(--accent);
+  width: 80.8%;
+  transform-origin: left center;
+  animation: cvBarGrow 1200ms 300ms cubic-bezier(.22,.61,.36,1) both;
+}
+.cv-bar__rest {
+  flex: 1;
+  background: var(--surface-3);
+}
+.cv-bar__tick {
+  position: absolute;
+  bottom: -56px;
+  left: 80.8%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: cvFadeIn 600ms 1400ms ease-out both;
+}
+.cv-bar__pct {
+  font-size: 64px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* circular sector (female) */
+.cv-sector {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  align-self: center;
+  margin-top: 0;
+}
+.cv-sector__svg { display: block; }
+.cv-sector__arc {
+  stroke-dasharray: 502;
+  stroke-dashoffset: 502;
+  animation: cvSweep 1200ms 300ms cubic-bezier(.22,.61,.36,1) forwards;
+}
+.cv-sector__centre {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  animation: cvFadeIn 700ms 1300ms ease-out both;
+}
+.cv-sector__pct {
+  font-size: 56px;
+  color: var(--text);
+  line-height: 1;
+}
+.cv-sector__sub {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.28em;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 4 — age range dot plot
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-range {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 80px;
+  flex: 1;
+}
+.cv-range__plot {
+  position: relative;
+  height: 320px;
+  margin: 0 60px;
+}
+.cv-range__axis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--rule);
+}
+.cv-range__tick {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 12px;
+  margin-top: -6px;
+  background: var(--text-faint);
+}
+.cv-range__tick-label {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+}
+.cv-range__dot {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: cvDotPop 600ms cubic-bezier(.34,1.56,.64,1) forwards;
+  transform: translate(-50%, -50%);
+}
+.cv-range__dot-circle {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--surface);
+}
+.cv-range__dot--mean .cv-range__dot-circle {
+  background: var(--surface-2);
+  border: 2px solid var(--text-mute);
+}
+
+/* alternating vertical offsets: even = label below dot, odd = label above */
+.cv-range__dot-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+  font-family: var(--font-display-en);
+  font-style: italic;
+}
+.cv-range__dot--alt0 .cv-range__dot-label {
+  top: 30px;
+}
+.cv-range__dot--alt1 .cv-range__dot-label {
+  bottom: 30px;
+  flex-direction: column-reverse;
+}
+.cv-range__dot-name {
+  font-size: 22px;
+  color: var(--text);
+}
+.cv-range__dot--mean .cv-range__dot-name { color: var(--text-mute); }
+.cv-range__dot-cohort {
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+  font-style: normal;
+}
+.cv-range__dot--mean .cv-range__dot-cohort { color: var(--text-mute); }
+
+/* connector tick (vertical line from dot to label) */
+.cv-range__dot::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 22px;
+  margin-left: -0.5px;
+  background: var(--rule);
+}
+.cv-range__dot--alt0::after { transform: translateY(8px); }
+.cv-range__dot--alt1::after { transform: translateY(-30px); }
+
+.cv-range__axis-cap {
+  align-self: center;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+  margin-top: 30px;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 5 — volume hero 565 → 735, +30%
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-volume {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 60px;
+  flex: 1;
+  position: relative;
+}
+.cv-volume__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: cvFadeUp 700ms ease-out both;
+}
+.cv-volume__node--end { animation-delay: 800ms; }
+.cv-volume__label {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+}
+.cv-volume__num {
+  font-size: 240px;
+  color: var(--text);
+  line-height: 0.9;
+}
+.cv-volume__num--end { color: var(--text); }
+.cv-volume__cap {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.18em;
+}
+.cv-volume__arrow {
+  align-self: center;
+  margin-top: 18px;
+}
+.cv-volume__arrow-line {
+  animation: cvArrowDraw 800ms 400ms cubic-bezier(.22,.61,.36,1) both;
+}
+.cv-volume__delta {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  animation: cvFadeUp 700ms 1300ms ease-out both;
+}
+.cv-volume__delta-num {
+  font-size: 72px;
+  color: var(--accent);
+  line-height: 1;
+  font-style: italic;
+}
+.cv-volume__delta-cap {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 6 — native StackedBar of 5-year procedure volume
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-figure {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+  margin-top: 10px;
+  animation: cvFadeIn 800ms ease-out both;
+}
+.cv-figure__chart {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  padding: 20px 24px;
+}
+.cv-figure__delta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  padding-left: 30px;
+  border-left: 1px solid var(--rule);
+}
+.cv-figure__delta-num {
+  font-size: 110px;
+  color: var(--accent);
+  line-height: 0.95;
+}
+.cv-figure__delta-cap {
+  font-size: 14px;
+  color: var(--text-2);
+  letter-spacing: 0.16em;
+  max-width: 180px;
+}
+
+/* ────────────────────────────────────────────────────────────────────
+ * step 7 — three driver pills, staggered
+ * ──────────────────────────────────────────────────────────────────── */
+.cv-drivers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  margin-top: 30px;
+}
+.cv-driver {
+  padding: 28px 32px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  animation: cvFadeUp 750ms cubic-bezier(.22,.61,.36,1) forwards;
+}
+/* slight vertical stagger for the middle pill — visual rhythm */
+.cv-drivers .cv-driver:nth-child(2) { transform: translateY(20px); }
+.cv-driver__mono {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.cv-driver__en {
+  font-family: var(--font-display-en);
+  font-size: 30px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.22;
+}
+.cv-driver__rule { margin: 6px 0; }
+.cv-driver__example {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+}

@@ -1,0 +1,450 @@
+/* Chapter 1 · hook-context — refined print journal aesthetic
+   (monochrome-print theme). Quiet, generous white space. */
+
+.hk-scene {
+  position: absolute;
+  inset: 0;
+  padding: 80px 130px 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.hk-mono   { font-family: var(--font-mono); letter-spacing: 0.06em; }
+.hk-accent { color: var(--accent); }
+
+/* masthead at top */
+.hk-masthead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.18em;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.hk-masthead__issue { color: var(--accent); }
+.hk-masthead__sep   { color: var(--text-faint); }
+.hk-masthead__topic { color: var(--text-2); }
+
+/* folio (chapter number top-right) */
+.hk-folio {
+  position: absolute;
+  top: 80px;
+  right: 130px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+
+/* section header used across multiple steps */
+.hk-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 1300px;
+}
+.hk-section__eyebrow {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.hk-section__title {
+  font-family: var(--font-display-en);
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+.hk-section__sub {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  color: var(--text-2);
+  line-height: 1.35;
+  font-style: italic;
+  margin-top: 4px;
+}
+
+@keyframes hkFadeIn {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: none;              opacity: 1; }
+}
+@keyframes hkRuleDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* citation badge bottom-right */
+.hk-cite {
+  position: absolute;
+  bottom: 60px;
+  right: 130px;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border-top: 1px solid var(--rule);
+  font-feature-settings: "tnum", "lnum";
+}
+
+/* ─── step 1 cover ─── */
+
+.hk-scene--greeting { justify-content: center; }
+.hk-cover {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1400px;
+  animation: hkFadeIn 1000ms ease-out both;
+}
+.hk-cover__eyebrow {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.26em;
+}
+.hk-cover__title {
+  font-family: var(--font-display-en);
+  font-size: 96px;
+  line-height: 1.08;
+  color: var(--text);
+  font-weight: 400;
+  margin: 0;
+  font-style: normal;
+  letter-spacing: -0.015em;
+}
+.hk-cover__sub {
+  font-family: var(--font-display-en);
+  font-size: 30px;
+  line-height: 1.4;
+  color: var(--text-2);
+  font-weight: 400;
+  font-style: italic;
+  margin: 6px 0 0;
+  max-width: 1100px;
+}
+.hk-cover__rule {
+  width: 360px;
+  margin: 30px 0 12px;
+  animation: hkRuleDraw 900ms 600ms ease-out both;
+  transform-origin: left center;
+}
+.hk-cover__byline {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text-2);
+  letter-spacing: 0.01em;
+}
+.hk-cover__author { font-weight: 500; color: var(--text); }
+.hk-cover__aff    { color: var(--text-mute); font-style: italic; }
+
+/* ─── steps 2 & 3 registry diagram ─── */
+
+.hk-reg {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 30px;
+  animation: hkFadeIn 900ms 400ms ease-out both;
+}
+.hk-reg__bar {
+  display: flex;
+  height: 70px;
+  border: 1px solid var(--rule);
+}
+.hk-reg__seg {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 18px;
+  border-right: 1px solid var(--rule);
+  transition: all 600ms ease;
+}
+.hk-reg__seg:last-child { border-right: 0; }
+.hk-reg__seg--cbtrus { flex: 52; background: var(--surface-2); }
+.hk-reg__seg--eu     { flex: 28; background: var(--surface-3); }
+.hk-reg__seg--rest   { flex: 12; background: var(--surface); }
+.hk-reg__seg--asia   { flex: 8;  background: var(--surface); }
+.hk-reg__seg--dim    { opacity: 0.35; }
+.hk-reg__seg--accent {
+  background: var(--accent-soft);
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+  flex-grow: 1.5;
+}
+.hk-reg__seg-label {
+  font-size: 13px;
+  color: var(--text-2);
+  letter-spacing: 0.12em;
+  margin-bottom: 4px;
+}
+.hk-reg__seg--accent .hk-reg__seg-label { color: var(--accent); font-weight: 500; }
+.hk-reg__seg-pct {
+  font-size: 18px;
+  color: var(--text);
+  font-feature-settings: "tnum";
+}
+.hk-reg__seg--accent .hk-reg__seg-pct { color: var(--accent); }
+.hk-reg__caption {
+  font-size: 12px;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+
+/* ─── step 4 factors ─── */
+
+.hk-factors {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 26px;
+  margin-top: 20px;
+}
+.hk-factor {
+  padding: 28px 32px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: hkFadeIn 800ms ease-out both;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+.hk-factor__mono {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+}
+.hk-factor__en {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.2;
+}
+.hk-factor__rule { margin: 6px 0; }
+.hk-factor__example {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.06em;
+  line-height: 1.45;
+}
+
+/* ─── step 5 Taiwan context ─── */
+
+.hk-tw {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-top: 30px;
+  animation: hkFadeIn 800ms ease-out both;
+}
+.hk-tw__map {
+  padding: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+}
+.hk-tw__badges {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.hk-ctx {
+  padding: 18px 24px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hk-ctx__mono {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+}
+.hk-ctx__en {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* ─── step 6 thesis hero ─── */
+
+.hk-scene--thesis { justify-content: center; }
+.hk-thesis {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  animation: hkFadeIn 900ms ease-out both;
+}
+.hk-thesis__eyebrow {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.28em;
+}
+.hk-thesis__hero {
+  font-family: var(--font-display-en);
+  font-size: 130px;
+  line-height: 1.05;
+  color: var(--text);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+.hk-thesis__hero-em {
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 12px;
+  text-decoration-color: var(--accent);
+}
+.hk-thesis__rule {
+  width: 480px;
+  margin: 20px 0;
+  animation: hkRuleDraw 900ms 700ms ease-out both;
+  transform-origin: center;
+}
+.hk-thesis__sub {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  color: var(--text-2);
+  font-style: italic;
+  max-width: 1100px;
+  line-height: 1.4;
+}
+
+/* ─── step 7 institution card ─── */
+
+.hk-inst {
+  display: grid;
+  place-items: center;
+  margin-top: 30px;
+  animation: hkFadeIn 800ms ease-out both;
+}
+.hk-inst__card {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  padding: 50px 60px;
+  width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hk-inst__name {
+  font-family: var(--font-display-en);
+  font-size: 52px;
+  color: var(--text);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.hk-inst__branch {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text-mute);
+  font-style: italic;
+}
+.hk-inst__rule { margin: 16px 0; }
+.hk-inst__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.hk-inst__row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: baseline;
+  gap: 24px;
+}
+.hk-inst__row-mono {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+}
+.hk-inst__row-en {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text);
+}
+
+/* ─── step 8 headline numbers ─── */
+
+.hk-scene--numbers {}
+.hk-nums {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+  flex: 1;
+}
+.hk-num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: hkFadeIn 900ms cubic-bezier(.22,.61,.36,1) forwards;
+}
+.hk-num__mono {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.hk-num__value {
+  font-size: 220px;
+  line-height: 0.9;
+  color: var(--text);
+}
+.hk-num__caption {
+  font-size: 14px;
+  color: var(--text-mute);
+  letter-spacing: 0.12em;
+}
+.hk-nums__sep {
+  font-family: var(--font-display-en);
+  font-size: 80px;
+  color: var(--text-faint);
+  font-style: italic;
+  padding-top: 50px;
+}
+
+/* ─── step 9 agenda ─── */
+
+.hk-agenda {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 60px;
+  margin-top: 30px;
+  animation: hkFadeIn 800ms ease-out both;
+}
+.hk-agenda__item {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.hk-agenda__num {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+}
+.hk-agenda__label {
+  font-family: var(--font-display-en);
+  font-size: 24px;
+  color: var(--text);
+  font-style: italic;
+}

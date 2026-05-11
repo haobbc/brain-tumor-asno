@@ -1,0 +1,550 @@
+/* Chapter 2 · methods — quiet print-journal aesthetic.
+   Hairline rules, ink-blue accent, generous white space. */
+
+.mt-scene {
+  position: absolute;
+  inset: 0;
+  padding: 80px 130px 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.mt-mono   { font-family: var(--font-mono); letter-spacing: 0.06em; }
+.mt-accent { color: var(--accent); }
+
+/* masthead at top */
+.mt-masthead {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.18em;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.mt-masthead__issue { color: var(--accent); }
+.mt-masthead__sep   { color: var(--text-faint); }
+.mt-masthead__topic { color: var(--text-2); }
+
+/* folio (chapter number top-right) */
+.mt-folio {
+  position: absolute;
+  top: 80px;
+  right: 130px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+
+/* section header used across multiple steps */
+.mt-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 1300px;
+}
+.mt-section__eyebrow {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.mt-section__title {
+  font-family: var(--font-display-en);
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+
+/* citation badge bottom-right */
+.mt-cite {
+  position: absolute;
+  bottom: 60px;
+  right: 130px;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border-top: 1px solid var(--rule);
+  font-feature-settings: "tnum", "lnum";
+  max-width: 900px;
+  text-align: right;
+}
+
+/* keyframes */
+@keyframes mtFadeIn {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: none;              opacity: 1; }
+}
+@keyframes mtFadeInSoft {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes mtRuleDraw {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes mtCountReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes mtDashDraw {
+  from { stroke-dashoffset: var(--mt-dash-len, 600); }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ─── step 1 opener ─── */
+
+.mt-scene--opener { justify-content: center; }
+.mt-opener {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 1400px;
+  animation: mtFadeIn 1000ms ease-out both;
+}
+.mt-opener__eyebrow {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.26em;
+}
+.mt-opener__title {
+  font-family: var(--font-display-en);
+  font-size: 140px;
+  line-height: 1.05;
+  color: var(--text);
+  font-weight: 400;
+  font-style: italic;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+.mt-opener__rule {
+  width: 380px;
+  margin: 28px 0 14px;
+  animation: mtRuleDraw 900ms 500ms ease-out both;
+  transform-origin: left center;
+}
+.mt-opener__sub {
+  font-family: var(--font-display-en);
+  font-size: 28px;
+  color: var(--text-2);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ─── step 2 institution ─── */
+
+.mt-inst {
+  display: grid;
+  place-items: center;
+  margin-top: 30px;
+  animation: mtFadeIn 800ms ease-out both;
+}
+.mt-inst__card {
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  padding: 50px 60px;
+  width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mt-inst__name {
+  font-family: var(--font-display-en);
+  font-size: 52px;
+  color: var(--text);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.mt-inst__branch {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text-mute);
+  font-style: italic;
+}
+.mt-inst__rule { margin: 16px 0; }
+.mt-inst__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.mt-inst__row {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: baseline;
+  gap: 24px;
+}
+.mt-inst__row-mono {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+}
+.mt-inst__row-en {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text);
+}
+
+/* ─── step 3 initial number hero ─── */
+
+.mt-scene--initial { }
+.mt-initial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 60px;
+  flex: 1;
+  justify-content: center;
+  animation: mtFadeIn 900ms ease-out both;
+}
+.mt-initial__caption {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.26em;
+}
+.mt-initial__num {
+  font-size: 320px;
+  line-height: 0.9;
+  color: var(--text);
+  animation: mtCountReveal 1000ms 200ms cubic-bezier(.22,.61,.36,1) both;
+}
+.mt-initial__rule {
+  width: 200px;
+  margin: 20px 0;
+  animation: mtRuleDraw 800ms 800ms ease-out both;
+  transform-origin: center;
+}
+.mt-initial__sub {
+  font-family: var(--font-display-en);
+  font-size: 26px;
+  color: var(--text-mute);
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+/* ─── step 4 flow diagram ─── */
+
+.mt-scene--flow {}
+.mt-flow {
+  position: relative;
+  flex: 1;
+  margin-top: 20px;
+  /* Internal canvas — children positioned via inline top/left */
+}
+.mt-flow__svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* spine + arrow stroke draw */
+.mt-flow__spine {
+  stroke-dasharray: 470;
+  stroke-dashoffset: 470;
+  animation: mtDashDraw 800ms 200ms ease-out forwards;
+  --mt-dash-len: 470;
+}
+.mt-flow__arrow {
+  opacity: 0;
+  animation: mtFadeInSoft 400ms 950ms ease-out forwards;
+}
+.mt-flow__branch {
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+  --mt-dash-len: 320;
+}
+.mt-flow__branch--1 {
+  animation: mtDashDraw 600ms 600ms ease-out forwards;
+}
+.mt-flow__branch--2 {
+  animation: mtDashDraw 600ms 1100ms ease-out forwards;
+}
+.mt-flow__branch-tick {
+  opacity: 0;
+}
+.mt-flow__branch-tick--1 { animation: mtFadeInSoft 400ms 700ms ease-out forwards; }
+.mt-flow__branch-tick--2 { animation: mtFadeInSoft 400ms 1200ms ease-out forwards; }
+
+/* Nodes */
+.mt-node {
+  position: absolute;
+  width: 400px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  padding: 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  animation: mtFadeIn 700ms ease-out forwards;
+}
+.mt-node--start {
+  animation-delay: 100ms;
+}
+.mt-node--end {
+  animation-delay: 1400ms;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.mt-node__mono {
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+.mt-node__mono--accent { color: var(--accent); }
+.mt-node__num {
+  font-size: 96px;
+  line-height: 0.95;
+  color: var(--text);
+}
+.mt-node__num--accent { color: var(--accent); }
+.mt-node__cap {
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.16em;
+  margin-top: 4px;
+}
+
+/* Exclusion blocks (off-shoots) */
+.mt-excl {
+  position: absolute;
+  width: 720px;
+  background: var(--surface);
+  border-left: 1px solid var(--accent);
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  opacity: 0;
+  animation: mtFadeIn 600ms ease-out forwards;
+}
+.mt-excl--1 { animation-delay: 800ms; }
+.mt-excl--2 { animation-delay: 1300ms; }
+.mt-excl__tag {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.mt-excl__title {
+  font-family: var(--font-display-en);
+  font-size: 24px;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.2;
+}
+.mt-excl__rule { margin: 8px 0; }
+.mt-excl__body {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: baseline;
+  gap: 18px;
+}
+.mt-excl__count {
+  font-size: 56px;
+  line-height: 0.95;
+  color: var(--accent);
+}
+.mt-excl__detail {
+  font-family: var(--font-display-en);
+  font-size: 17px;
+  color: var(--text-2);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ─── step 5 final paired numbers ─── */
+
+.mt-scene--final {}
+.mt-final {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 40px;
+  flex: 1;
+}
+.mt-final__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  animation: mtCountReveal 900ms cubic-bezier(.22,.61,.36,1) forwards;
+}
+.mt-final__mono {
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.mt-final__value {
+  font-size: 260px;
+  line-height: 0.9;
+  color: var(--text);
+}
+.mt-final__caption {
+  font-size: 13px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+}
+.mt-final__sep {
+  font-family: var(--font-display-en);
+  font-size: 100px;
+  color: var(--text-faint);
+  font-style: italic;
+  padding-top: 60px;
+}
+.mt-final__note {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+  opacity: 0;
+  animation: mtFadeInSoft 700ms 1400ms ease-out forwards;
+}
+
+/* ─── step 6 classification framework ─── */
+
+.mt-scene--classify {}
+.mt-classify {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px 1fr;
+  gap: 18px;
+  align-items: stretch;
+  margin-top: 30px;
+}
+.mt-cls {
+  padding: 28px 30px;
+  background: var(--surface-2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  animation: mtFadeIn 800ms ease-out forwards;
+}
+.mt-cls--accent {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+.mt-cls__mono {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.24em;
+}
+.mt-cls__title {
+  font-family: var(--font-display-en);
+  font-size: 30px;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.2;
+}
+.mt-cls__rule { margin: 4px 0; }
+.mt-cls__rows {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mt-cls__row {
+  display: grid;
+  grid-template-columns: 12px 1fr;
+  align-items: baseline;
+  gap: 10px;
+}
+.mt-cls__dot {
+  width: 5px;
+  height: 5px;
+  background: var(--text-mute);
+  border-radius: 50%;
+  margin-top: 7px;
+}
+.mt-cls--accent .mt-cls__dot { background: var(--accent); }
+.mt-cls__row-en {
+  font-family: var(--font-display-en);
+  font-size: 18px;
+  color: var(--text-2);
+  line-height: 1.35;
+}
+.mt-classify__op {
+  align-self: center;
+  font-size: 32px;
+  color: var(--text-faint);
+  text-align: center;
+  letter-spacing: 0;
+}
+
+/* ─── step 7 NHI code table ─── */
+
+.mt-scene--procedures {}
+.mt-codes {
+  margin-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.mt-codes__head {
+  display: grid;
+  grid-template-columns: 56px 280px 1fr 280px;
+  align-items: baseline;
+  padding: 14px 8px;
+  border-bottom: 1px solid var(--rule);
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.22em;
+}
+.mt-codes__row {
+  display: grid;
+  grid-template-columns: 56px 280px 1fr 280px;
+  align-items: baseline;
+  padding: 18px 8px;
+  border-bottom: 1px solid var(--rule);
+  opacity: 0;
+  animation: mtFadeIn 600ms ease-out forwards;
+}
+.mt-codes__num {
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+}
+.mt-codes__cat {
+  font-family: var(--font-display-en);
+  font-size: 22px;
+  color: var(--text);
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+.mt-codes__detail {
+  font-family: var(--font-display-en);
+  font-size: 18px;
+  color: var(--text-2);
+  font-style: italic;
+}
+.mt-codes__code {
+  font-size: 18px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  font-feature-settings: "tnum", "lnum";
+  text-align: right;
+}
+.mt-codes__note {
+  margin-top: 22px;
+  font-size: 12px;
+  color: var(--text-mute);
+  letter-spacing: 0.14em;
+  font-feature-settings: "tnum";
+  opacity: 0;
+  animation: mtFadeInSoft 700ms 1000ms ease-out forwards;
+}

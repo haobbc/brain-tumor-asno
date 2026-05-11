@@ -1,0 +1,25 @@
+/* Generic StackedBar chart styles — used by StackedBar.tsx. */
+
+.stacked-bar {
+  display: block;
+}
+
+.stacked-bar__seg {
+  transform-origin: center bottom;
+  animation: sbSegIn 700ms var(--ease-quart) both;
+  animation-delay: calc(var(--col-i, 0) * 80ms + var(--seg-i, 0) * 50ms);
+}
+@keyframes sbSegIn {
+  from { transform: scaleY(0); opacity: 0; }
+  to   { transform: scaleY(1); opacity: 1; }
+}
+
+.stacked-bar__total {
+  opacity: 0;
+  animation: sbTotalIn 500ms var(--ease-quart) both;
+  animation-delay: calc(var(--col-i, 0) * 80ms + 600ms);
+}
+@keyframes sbTotalIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
