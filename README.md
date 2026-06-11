@@ -38,6 +38,14 @@ Click-driven web presentation for an ASNO 2026 oral abstract:
   - GBM **overrepresented** vs CBTRUS (20.2% vs 14.2%) — tertiary referral concentrates complex malignant cases
   - Pituitary 20.3% — within Molitch's community range 10–22%
 
+## Source-of-truth artifacts
+
+Original monthly OP schedule Excel files are no longer available. The highest available data source for this repository is the January 2026 aggregate analysis package:
+
+- [`sources/Brain tumor surgery list_Jan2026.docx`](sources/Brain%20tumor%20surgery%20list_Jan2026.docx) — analysis report / manuscript-source document
+- [`sources/Brain tumor surgery list_plots_Jan2026.xlsx`](sources/Brain%20tumor%20surgery%20list_plots_Jan2026.xlsx) — aggregate plotting workbook
+- [`sources/source-vs-study-data-audit.md`](sources/source-vs-study-data-audit.md) — audit comparing the source files against presentation data
+
 ## Workflow artifacts
 
 - [`article.md`](article.md) — full English manuscript

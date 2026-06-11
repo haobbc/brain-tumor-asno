@@ -182,7 +182,7 @@ Surgical procedure mix.
 
 ---
 
-Transsphenoidal pituitary 16.6%. Skull base resection 16.4%. Resections under 3 cm 13.9%. Resections over 6 cm 16.4%. Biopsy only 3.5%.
+Transsphenoidal pituitary 16.6%. Resections over 6 cm 16.4%. Resections under 3 cm 13.2%. Skull base resection 12.8%. Biopsy only 3.5%.
 
 ---
 

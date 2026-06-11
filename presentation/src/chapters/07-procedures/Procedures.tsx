@@ -71,8 +71,8 @@ function Step3Table() {
     { mono: "01", cat: "Resection 3.1 – 6 cm",        code: "83018B",    pct: 37.7, n: "1,243", dominant: true },
     { mono: "02", cat: "Transsphenoidal pituitary",   code: "83057B(A)", pct: 16.6, n: "550" },
     { mono: "03", cat: "Resection > 6 cm",            code: "83019B",    pct: 16.4, n: "541" },
-    { mono: "04", cat: "Skull base resection",        code: "83088B",    pct: 16.4, n: "541" },
-    { mono: "05", cat: "Resection ≤ 3 cm",            code: "83017B",    pct: 13.9, n: "459" },
+    { mono: "04", cat: "Skull base resection",        code: "83088B",    pct: 12.8, n: "422" },
+    { mono: "05", cat: "Resection ≤ 3 cm",            code: "83017B",    pct: 13.2, n: "436" },
     { mono: "06", cat: "Biopsy only",                 code: "83081 / 82 / 010B", pct:  3.5, n: "117" },
   ];
   return (

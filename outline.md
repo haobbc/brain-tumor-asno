@@ -167,15 +167,15 @@
 
 **Info pool**:
 - 3.1-6 cm resection 37.7% (n=1,243) —— article §Results
-- Transsphenoidal 16.6% (n=550); skull base 16.4% (n=541); biopsy 3.5% (n=117) —— article §Results
-- Resection ≤3 cm ~13.9%; resection >6 cm 16.4% (n by NHI code)
+- Transsphenoidal 16.6% (n=550); skull base 12.8% (n=422); biopsy 3.5% (n=117) —— source Table 4
+- Resection ≤3 cm 13.2% (n=436); resection >6 cm 16.4% (n=541) —— source Table 4
 - Procedure mix proportional across 5 years —— article §Results §Discussion
 - Visual props: procedure breakdown bars + stable mix annotation
 
 **Development plan**:
 - step 45 (~3s) — section opener "Surgical procedure mix"
 - step 46 (~12s) — procedure breakdown reveal: 3.1-6 cm dominates 37.7% hero + n=1,243
-- step 47 (~12s) — remaining categories: TS pituitary 16.6% / skull base 16.4% / resection ≤3 cm 13.9% / resection >6 cm 16.4% / biopsy 3.5%
+- step 47 (~12s) — remaining categories: TS pituitary 16.6% / resection >6 cm 16.4% / resection ≤3 cm 13.2% / skull base 12.8% / biopsy 3.5%
 - step 48 (~13s) — stable-mix observation: bar comparison across 5 years showing proportionality preserved + interpretation "structure didn't shift"
 
 **Excerpt**:

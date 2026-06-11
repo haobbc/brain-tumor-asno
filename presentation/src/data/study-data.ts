@@ -41,8 +41,8 @@ export const HISTOLOGY_ALL: HistologySlice[] = [
   { id: "neuronal",        label: "Neuronal and mixed neuronal-glial",    shortLabel: "Neuronal",    pct: 1.2,                  group: "minor" },
   { id: "meningioma-3",    label: "Meningioma, grade 3",                  shortLabel: "Mening G3",   pct: 1.0,                  group: "minor" },
   { id: "germ-cell",       label: "Germ cell tumors",                     shortLabel: "Germ cell",   pct: 0.9,                  group: "minor" },
-  { id: "other-astro",     label: "Other astrocytic glioma",              shortLabel: "Other astro", pct: 0.9,                  group: "minor" },
-  { id: "ependymal",       label: "Ependymal tumors",                     shortLabel: "Ependymal",   pct: 0.8,                  group: "minor" },
+  { id: "other-astro",     label: "Other astrocytic glioma",              shortLabel: "Other astro", pct: 0.8,                  group: "minor" },
+  { id: "ependymal",       label: "Ependymal tumors",                     shortLabel: "Ependymal",   pct: 0.9,                  group: "minor" },
   { id: "embryonal",       label: "Embryonal tumors",                     shortLabel: "Embryonal",   pct: 0.6,                  group: "minor" },
 ];
 
@@ -76,17 +76,11 @@ export const HISTOLOGY_PEDIATRIC: HistologySlice[] = [
 ];
 
 /* Surgical procedures over 5 years (stacked bar).
-   Source: pptx slide 4. Per-year totals confirmed; segments are
-   proportional approximations based on the stable mix observed across
-   years × yearly totals. The article states the mix stays proportional
-   so segment ratios are roughly:
-     ≤3cm resection      ~13.9%
-     3.1–6cm resection   ~37.7%
-     >6cm resection      ~16.4%
-     transsphenoidal     ~16.6%
-     skull base          ~12.0%
-     biopsy              ~3.5%
-   (year-2 TS peaked at 19.7% per article §Results) */
+   Source of truth: sources/Brain tumor surgery list_plots_Jan2026.xlsx,
+   sheet "Surgery手術數", rows 138–144; same values appear in
+   sources/Brain tumor surgery list_Jan2026.docx Table 4.
+
+   These are exact aggregate counts, not proportional approximations. */
 export type ProcedureKey =
   | "resectionSmall"
   | "resectionMedium"
@@ -117,52 +111,52 @@ export const VOLUME_BY_YEAR: VolumeYear[] = [
     yearIndex: 1,
     total: 565,
     segments: {
-      resectionSmall: 78,
-      resectionMedium: 213,
-      resectionLarge: 92,
-      transsphenoidal: 93,
-      skullBase: 68,
-      biopsy: 21,
+      resectionSmall: 71,
+      resectionMedium: 201,
+      resectionLarge: 86,
+      transsphenoidal: 94,
+      skullBase: 90,
+      biopsy: 23,
     },
   },
   {
     label: "2021-22",
     yearIndex: 2,
-    total: 626,
-    // article: TS peaked at 19.7% this year ⇒ 124 cases
+    total: 630,
+    // TS peaked at 19.7% this year ⇒ 124 cases.
     segments: {
-      resectionSmall: 70,
-      resectionMedium: 235,
-      resectionLarge: 100,
+      resectionSmall: 72,
+      resectionMedium: 237,
+      resectionLarge: 103,
       transsphenoidal: 124,
-      skullBase: 77,
-      biopsy: 20,
+      skullBase: 73,
+      biopsy: 21,
     },
   },
   {
     label: "2022-23",
     yearIndex: 3,
-    total: 660,
+    total: 659,
     segments: {
-      resectionSmall: 84,
-      resectionMedium: 252,
-      resectionLarge: 113,
+      resectionSmall: 85,
+      resectionMedium: 254,
+      resectionLarge: 110,
       transsphenoidal: 116,
-      skullBase: 75,
+      skullBase: 74,
       biopsy: 20,
     },
   },
   {
     label: "2023-24",
     yearIndex: 4,
-    total: 723,
+    total: 720,
     segments: {
       resectionSmall: 103,
-      resectionMedium: 290,
-      resectionLarge: 102,
-      transsphenoidal: 109,
-      skullBase: 95,
-      biopsy: 24,
+      resectionMedium: 291,
+      resectionLarge: 103,
+      transsphenoidal: 102,
+      skullBase: 93,
+      biopsy: 28,
     },
   },
   {
@@ -171,11 +165,11 @@ export const VOLUME_BY_YEAR: VolumeYear[] = [
     total: 735,
     segments: {
       resectionSmall: 105,
-      resectionMedium: 253,
-      resectionLarge: 144,
-      transsphenoidal: 108,
-      skullBase: 93,
-      biopsy: 32,
+      resectionMedium: 260,
+      resectionLarge: 139,
+      transsphenoidal: 114,
+      skullBase: 92,
+      biopsy: 25,
     },
   },
 ];
