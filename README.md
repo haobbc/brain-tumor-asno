@@ -41,10 +41,12 @@ Click-driven web presentation for an ASNO 2026 oral abstract:
 ## Workflow artifacts
 
 - [`article.md`](article.md) — full English manuscript
-- [`script.md`](script.md) — 9-chapter spoken script (~963 words / ~7.5 min @ 130 wpm)
+- [`script.md`](script.md) — 9-chapter spoken script (~999 words / ~7.7 min @ 130 wpm)
 - [`outline.md`](outline.md) — chapter × step development plan
 - [`references-map.md`](references-map.md) — bibliographic mapping for every cited claim
 - [`references.bib`](references.bib) — 57-entry BibTeX library
+- [`exports/brain-tumor-asno-slides.pdf`](exports/brain-tumor-asno-slides.pdf) — 16:9 static slide backup PDF
+- [`exports/brain-tumor-asno-slides.pptx`](exports/brain-tumor-asno-slides.pptx) — editable static slide backup deck
 
 ## Stack
 
