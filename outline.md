@@ -65,7 +65,7 @@
 - Mean age 54.2 years (SD 16.7) —— article §Results Table 3
 - 80.8% surgeries on age ≥40 —— article §Results
 - 53.9% female unique patients —— article §Results Table 2
-- Age extremes: embryonal 18 yr / germ cell 19 yr (young); lymphoma 64 / metastatic 60 (older) —— article §Results Table 3
+- Median age spectrum by histology: embryonal 9.4 yr / germ cell 15.1 yr; top common tumors pituitary 53.3, meningioma G1-2 59.7, glioma G4 60.9, metastatic 60.8; lymphoma 65.7; cohort overall 56.8 —— sources/Brain tumor surgery list_Jan2026.docx Table 3
 - Volume growth: 565 → 735 across 5 years (+30%) —— article §Results Table 4 §Discussion
 - Volume drivers: imaging access, awareness, aging —— article §Discussion
 - Figures available: **`fig-procedures-5year.png`** (stacked bar, slide04-4098)
@@ -75,7 +75,7 @@
 - step 17 (~4s) — section opener "The cohort, in three numbers"
 - step 18 (~8s) — hero numbers reveal: Mean age 54.2 ± 16.7
 - step 19 (~8s) — age ≥40 visual: 80.8% bar fill + slight female 53.9% badge
-- step 20 (~10s) — age range reveal: pediatric mean (embryonal 18, germ cell 19) vs older (lymphoma 64, metastatic 60)
+- step 20 (~10s) — median age spectrum: pediatric tumors, top common adult tumors, muted cohort-overall marker
 - step 21 (~8s) — volume reveal: 565 (year 1) → 735 (year 5) hero numbers with +30% accent
 - step 22 (~10s) — **show `fig-procedures-5year.png`** stacked bar with annotation overlay highlighting growth trend
 - step 23 (~7s) — driver pills: imaging access / public awareness / aging demographics

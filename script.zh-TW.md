@@ -74,7 +74,7 @@
 
 ---
 
-不同腫瘤類型的平均年齡差異很大。Embryonal tumors 平均 18 歲。Germ cell tumors 平均 19 歲。另一端，lymphomas 平均 64 歲，metastatic tumors 平均 60 歲。
+不同腫瘤類型的年齡中位數差異很大。Embryonal tumors 的 median 是 9.4 歲，germ cell tumors 是 15.1 歲。常見成人腫瘤中，pituitary tumors 是 53.3 歲，meningiomas 是 59.7 歲，glioma grade 4 和 metastatic tumors 約 61 歲，而 lymphomas 是 65.7 歲。
 
 ---
 

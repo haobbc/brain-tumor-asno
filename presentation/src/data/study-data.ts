@@ -181,13 +181,18 @@ export const F_M_RATIO_MENINGIOMA = 2.5; // 2.5 : 1
 export const M_F_RATIO_GERM_CELL = 3.0;  // 3 : 1
 export const PCT_MET_AGE_OVER_40 = 95.8;
 
-/* Age-by-tumor means (from article Table 3) — used by ch3 step 4 dot plot */
-export const TUMOR_MEAN_AGES = [
-  { id: "embryonal",   label: "Embryonal tumors", mean: 18, group: "young" as const },
-  { id: "germ-cell",   label: "Germ cell tumors", mean: 19, group: "young" as const },
-  { id: "cohort",      label: "Cohort overall",   mean: 54.2, group: "ref"   as const },
-  { id: "metastatic",  label: "Metastatic tumors",mean: 60, group: "old"   as const },
-  { id: "lymphoma",    label: "Lymphoma",         mean: 64, group: "old"   as const },
+/* Age-by-tumor medians (from sources/Brain tumor surgery list_Jan2026.docx Table 3)
+   — used by ch3 step 4 dot plot. Median (Q1-Q3) is preferred here because
+   embryonal and glioma G4 have extreme age ranges that skew mean age. */
+export const TUMOR_MEDIAN_AGES = [
+  { id: "embryonal",      label: "Embryonal",   fullLabel: "Embryonal tumors",             median: 9.4,  iqr: "6.1-12.3",  group: "young" as const },
+  { id: "germ-cell",      label: "Germ cell",   fullLabel: "Germ cell tumors",             median: 15.1, iqr: "12.3-24.1", group: "young" as const },
+  { id: "pituitary",      label: "Pituitary",   fullLabel: "Pituitary tumors",             median: 53.3, iqr: "41.1-63.8", group: "top4"  as const },
+  { id: "cohort",         label: "Overall",     fullLabel: "Cohort overall",               median: 56.8, iqr: "44.3-66.2", group: "ref"   as const },
+  { id: "glioma-g4",      label: "Glioma G4",   fullLabel: "Diffuse glioma, grade 4",      median: 60.9, iqr: "46.1-69.3", group: "top4"  as const },
+  { id: "meningioma-g12", label: "Meningioma",  fullLabel: "Meningioma, grade 1-2",        median: 59.7, iqr: "49.5-67.9", group: "top4"  as const },
+  { id: "metastatic",     label: "Metastatic",  fullLabel: "Metastatic tumors",           median: 60.8, iqr: "53.7-66.9", group: "top4"  as const },
+  { id: "lymphoma",       label: "Lymphoma",    fullLabel: "Lymphoma",                     median: 65.7, iqr: "58.5-70.0", group: "old"   as const },
 ];
 
 /* CBTRUS comparison numbers (Ostrom 2022) — used by ch5 */

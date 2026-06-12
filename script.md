@@ -74,7 +74,7 @@ Over 80% of surgeries performed on patients aged 40 and older. Slight female pre
 
 ---
 
-Mean age varied dramatically by tumor type. Embryonal tumors — mean age 18 years. Germ cell tumors — 19. At the other end, lymphomas — mean 64. Metastatic tumors — 60.
+Median age varied dramatically by tumor type. Embryonal tumors — median 9.4 years. Germ cell tumors — 15.1. Among the common adult tumors, pituitary tumors were 53.3, meningiomas 59.7, glioma grade 4 and metastatic tumors around 61, and lymphomas 65.7.
 
 ---
 

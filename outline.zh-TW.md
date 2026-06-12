@@ -65,7 +65,7 @@
 - 平均年齡 54.2 歲（SD 16.7）—— article §Results Table 3
 - 80.8% 手術發生於年齡 ≥40 —— article §Results
 - 不重複病人中 53.9% 為女性 —— article §Results Table 2
-- 年齡極端：embryonal 18 歲 / germ cell 19 歲（年輕）；lymphoma 64 / metastatic 60（較年長）—— article §Results Table 3
+- 各病理年齡中位數：embryonal 9.4 歲 / germ cell 15.1 歲；前幾大常見腫瘤 pituitary 53.3、meningioma G1-2 59.7、glioma G4 60.9、metastatic 60.8；lymphoma 65.7；cohort overall 56.8 —— sources/Brain tumor surgery list_Jan2026.docx Table 3
 - 手術量成長：565 → 735 across 5 years（+30%）—— article §Results Table 4 §Discussion
 - Volume drivers：imaging access、awareness、aging —— article §Discussion
 - 可用圖：**`fig-procedures-5year.png`**（stacked bar, slide04-4098）
@@ -75,7 +75,7 @@
 - step 17 (~4s) — section opener：「The cohort, in three numbers」
 - step 18 (~8s) — hero numbers reveal：Mean age 54.2 ± 16.7
 - step 19 (~8s) — age ≥40 visual：80.8% bar fill + slight female 53.9% badge
-- step 20 (~10s) — age range reveal：pediatric mean（embryonal 18, germ cell 19）vs older（lymphoma 64, metastatic 60）
+- step 20 (~10s) — median age spectrum：pediatric tumors、常見成人腫瘤、cohort overall 單色標註
 - step 21 (~8s) — volume reveal：565（year 1）→ 735（year 5）hero numbers with +30% accent
 - step 22 (~10s) — **show `fig-procedures-5year.png`** stacked bar with annotation overlay highlighting growth trend
 - step 23 (~7s) — driver pills：imaging access / public awareness / aging demographics

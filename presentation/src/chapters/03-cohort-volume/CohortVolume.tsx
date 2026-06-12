@@ -1,6 +1,7 @@
+import type { CSSProperties } from "react";
 import type { ChapterStepProps } from "../../registry/types";
 import { StackedBar } from "../../components/charts/StackedBar";
-import { VOLUME_BY_YEAR } from "../../data/study-data";
+import { TUMOR_MEDIAN_AGES, VOLUME_BY_YEAR } from "../../data/study-data";
 import "./CohortVolume.css";
 
 export default function CohortVolume({ step }: ChapterStepProps) {
@@ -146,9 +147,9 @@ function Step4AgeRange() {
     <div className="cv-scene cv-scene--range">
       <Page />
       <div className="cv-section">
-        <div className="cv-section__eyebrow cv-mono">MEAN AGE BY TUMOR TYPE</div>
+        <div className="cv-section__eyebrow cv-mono">MEDIAN AGE BY TUMOR TYPE</div>
         <div className="cv-section__title">
-          Dramatic spread <span className="cv-accent">·</span> embryonal to lymphoma.
+          Age spectrum <span className="cv-accent">·</span> median, less outlier-sensitive.
         </div>
       </div>
       <AgeRangeDots />
@@ -397,24 +398,30 @@ function FemaleSector() {
 }
 
 function AgeRangeDots() {
-  // Horizontal axis 0 → 80 years. Plot each tumor type as a labelled dot
-  // at its mean age. Staggered entry animation.
-  // young end (left, accent): embryonal 18, germ cell 19
-  // old end (right, accent): metastatic 60, lymphoma 64
-  // overall mean (centre, faint): 54.2
-  const points: {
-    age: number;
-    label: string;
-    cohort: string;
-    side: "young" | "old" | "mean";
-    delay: number;
-  }[] = [
-    { age: 18, label: "Embryonal", cohort: "mean 18 yr", side: "young", delay: 350 },
-    { age: 19, label: "Germ cell", cohort: "mean 19 yr", side: "young", delay: 700 },
-    { age: 54.2, label: "Cohort overall", cohort: "mean 54.2 yr", side: "mean", delay: 1050 },
-    { age: 60, label: "Metastatic", cohort: "mean 60 yr", side: "old", delay: 1350 },
-    { age: 64, label: "Lymphoma", cohort: "mean 64 yr", side: "old", delay: 1650 },
-  ];
+  // Horizontal axis 0 → 80 years. Plot median age by tumor type.
+  // Median (Q1-Q3) is used instead of mean because several groups have
+  // extreme age ranges. Top-four common tumors are included alongside the
+  // young/old extremes; overall cohort is shown in a muted single-colour mark.
+  const labelOffsets: Record<string, number> = {
+    embryonal: 34,
+    "germ-cell": 76,
+    pituitary: 96,
+    cohort: 136,
+    "meningioma-g12": 176,
+    metastatic: 66,
+    "glioma-g4": 114,
+    lymphoma: 158,
+  };
+  const labelSides: Record<string, "above" | "below"> = {
+    embryonal: "below",
+    "germ-cell": "above",
+    pituitary: "below",
+    cohort: "above",
+    "meningioma-g12": "below",
+    metastatic: "above",
+    "glioma-g4": "below",
+    lymphoma: "above",
+  };
   const axisMin = 0;
   const axisMax = 80;
   const pct = (age: number) => ((age - axisMin) / (axisMax - axisMin)) * 100;
@@ -434,24 +441,29 @@ function AgeRangeDots() {
           </div>
         ))}
         {/* dots */}
-        {points.map((p, i) => (
-          <div
-            key={p.label}
-            className={`cv-range__dot cv-range__dot--${p.side} cv-range__dot--alt${i % 2}`}
-            style={{
-              left: `${pct(p.age)}%`,
-              animationDelay: `${p.delay}ms`,
-            }}
-          >
-            <span className="cv-range__dot-circle" />
-            <span className="cv-range__dot-label">
-              <span className="cv-range__dot-name">{p.label}</span>
-              <span className="cv-mono cv-range__dot-cohort">{p.cohort}</span>
-            </span>
-          </div>
-        ))}
+        {TUMOR_MEDIAN_AGES.map((p, i) => {
+          const side = labelSides[p.id] ?? (i % 2 ? "above" : "below");
+          const style = {
+            left: `${pct(p.median)}%`,
+            animationDelay: `${250 + i * 120}ms`,
+            "--label-offset": `${labelOffsets[p.id] ?? 44}px`,
+          } as CSSProperties;
+          return (
+            <div
+              key={p.id}
+              className={`cv-range__dot cv-range__dot--${p.group} cv-range__dot--${side}`}
+              style={style}
+            >
+              <span className="cv-range__dot-circle" />
+              <span className="cv-range__dot-label">
+                <span className="cv-range__dot-name">{p.label}</span>
+                <span className="cv-mono cv-range__dot-cohort">median {p.median} yr</span>
+              </span>
+            </div>
+          );
+        })}
       </div>
-      <div className="cv-range__axis-cap cv-mono">age in years (mean)</div>
+      <div className="cv-range__axis-cap cv-mono">age in years · median (Q1-Q3 in Table 3)</div>
     </div>
   );
 }
