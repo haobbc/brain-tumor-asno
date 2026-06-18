@@ -70,7 +70,21 @@ cd presentation
 npm install
 npm run dev          # http://localhost:5175
 npm run build        # production bundle → dist/
+npm run build:offline # single self-contained HTML → dist/ (fonts inlined, zero network)
 ```
+
+### Offline build
+
+`npm run build:offline` bundles the whole deck into one self-contained
+HTML file (via `vite-plugin-singlefile`) that opens straight from
+`file://` with no network or Google Fonts CDN dependency. It first runs
+`scripts/build-offline-fonts.mjs` to download the woff2 faces used by the
+monochrome-print theme (Source Serif 4, JetBrains Mono, and a `&text=`
+subset of Noto Serif SC) into the gitignored `src/styles/fonts/`, then
+inlines them as base64 into the bundle.
+
+Re-run `npm run fonts:offline` after changing the active theme or the CJK
+glyphs used (the `CJK_TEXT` constant in the script).
 
 ## Citation note
 
