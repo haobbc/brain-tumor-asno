@@ -29,7 +29,10 @@ jobs:
           cache: npm
           cache-dependency-path: presentation/package-lock.json
 
-      - run: npm ci
+      # npm install (not `npm ci`): vite-plugin-singlefile pulls in optional
+      # wasm-fallback deps (@emnapi/*) that npm's lockfile handling resolves
+      # inconsistently, making strict `npm ci` reject an otherwise valid lock.
+      - run: npm install --no-audit --no-fund
 
       - run: npm run build
 
