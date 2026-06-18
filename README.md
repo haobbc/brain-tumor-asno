@@ -50,6 +50,8 @@ Original monthly OP schedule Excel files are no longer available. The highest av
 
 - [`article.md`](article.md) — full English manuscript
 - [`script.md`](script.md) — 9-chapter spoken script (~999 words / ~7.7 min @ 130 wpm)
+- [`script.zh-TW.md`](script.zh-TW.md) — Traditional Chinese spoken script
+- [`script.bilingual.md`](script.bilingual.md) — English / Traditional Chinese side-by-side spoken script
 - [`outline.md`](outline.md) — chapter × step development plan
 - [`references-map.md`](references-map.md) — bibliographic mapping for every cited claim
 - [`references.bib`](references.bib) — 57-entry BibTeX library
